@@ -7,4 +7,6 @@ public interface UseService {
     UseResponse create(UseRequest request);
 
     UseResponse update(UseRequest request, String id);
+
+    UseResponse getById(String id);
 }

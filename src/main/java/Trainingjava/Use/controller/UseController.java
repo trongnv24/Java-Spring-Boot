@@ -2,10 +2,13 @@ package Trainingjava.Use.controller;
 
 import Trainingjava.Use.dto.request.UseRequest;
 import Trainingjava.Use.dto.response.UseResponse;
+import Trainingjava.Use.entity.UseEntity;
 import Trainingjava.Use.service.UseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/user")
@@ -31,12 +34,25 @@ public class UseController {
     }
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
-    public  UseResponse update(@RequestBody UseRequest request, @PathVariable String id) {
+    public  UseResponse update(@RequestBody UseRequest request, @PathVariable("id") String id) {
         log.info("=== Start api create  use ===");
         log.info("=== Request body: {}", request);
-        UseResponse response = service.create(request);
+        UseResponse response = service.update(request, id);
         log.info("=== Finish api create user. Use id: {} ===", response.getId());
         return response;
     }
+
+    @GetMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public UseResponse getById(@PathVariable("id") String id) {
+        log.info("=== Start api getById use === ");
+        log.info("=== String Id: {}===", id);
+        UseResponse response = service.getById(id);
+        log.info("=== Finish api getById user. Use id: {} ===",response.getId());
+        return response;
+    }
+
+
+
 }
 
