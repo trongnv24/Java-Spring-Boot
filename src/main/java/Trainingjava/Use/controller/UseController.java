@@ -29,5 +29,14 @@ public class UseController {
         return response;
 
     }
+    @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public  UseResponse update(@RequestBody UseRequest request, @PathVariable String id) {
+        log.info("=== Start api create  use ===");
+        log.info("=== Request body: {}", request);
+        UseResponse response = service.create(request);
+        log.info("=== Finish api create user. Use id: {} ===", response.getId());
+        return response;
+    }
 }
 
